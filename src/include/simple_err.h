@@ -12,6 +12,10 @@ const unsigned long int code##_CDX = val;
 // add error information
 _ADD_ERROR_INFORMATION_(SUCCESS, 0, "Success")
 _ADD_ERROR_INFORMATION_(CANNOT_OPEN_FILE, 1, "Cannot open file")
+_ADD_ERROR_INFORMATION_(SHORT_WRITE, 2, "Short write")
+_ADD_ERROR_INFORMATION_(SHORT_READ, 3, "Short read")
+_ADD_ERROR_INFORMATION_(OUTOF_BOUNDARY, 4, "Requested parameter out of boundary")
+_ADD_ERROR_INFORMATION_(NOT_SIMPLEFS, 5, "Filesystem on device is not simplefs")
 
 #undef _ADD_ERROR_INFORMATION_
 

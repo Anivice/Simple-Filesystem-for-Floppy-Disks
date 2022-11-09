@@ -33,6 +33,7 @@ add_library(${PROJECT_NAME} STATIC
         src/debug/elf_process.cpp
         src/debug/invoke_addr2line.cpp
         src/debug/simple_err.cpp    src/include/simple_err.h
+        src/fs/basic_io.cpp         src/include/basic_io.h
         )
 target_include_directories(${PROJECT_NAME} PUBLIC src/include)
 target_link_libraries(${PROJECT_NAME}      PUBLIC ${LIBELF_LIBRARIES})
@@ -42,6 +43,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${LIBELF_INCLUDE_DIRS})
 target_compile_options(${PROJECT_NAME}     PUBLIC ${LIBELF_CFLAGS_OTHER})
 
 add_executable(${PROJECT_NAME}_exe src/main.cpp)
-target_link_libraries(${PROJECT_NAME}_exe PUBLIC swplayer)
+target_link_libraries(${PROJECT_NAME}_exe PUBLIC ${PROJECT_NAME})
 
 _add_test(ftrace    "function trace system")
+_add_test(basic_io  "test for basic I/O")
