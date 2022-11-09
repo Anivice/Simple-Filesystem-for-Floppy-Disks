@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_NAME        swplayer)
+set(PROJECT_NAME        floppyfs)
 set(PROJECT_VERSION     0.0.1)
 project(${PROJECT_NAME} C CXX)
 
@@ -28,21 +28,20 @@ add_compile_definitions("PACKAGE_VERSION=\"${PROJECT_VERSION}\"")
 add_compile_options(-fprofile-arcs -ftest-coverage -O0 --coverage)
 add_link_options(--coverage)
 
-add_library(swplayer STATIC
+add_library(${PROJECT_NAME} STATIC
         src/include/debug.h
         src/debug/elf_process.cpp
         src/debug/invoke_addr2line.cpp
         src/debug/simple_err.cpp    src/include/simple_err.h
-        src/include/wav.h
         )
-target_include_directories(swplayer PUBLIC src/include)
-target_link_libraries(swplayer      PUBLIC ${LIBELF_LIBRARIES})
-target_link_libraries(swplayer      PUBLIC gcov)
+target_include_directories(${PROJECT_NAME} PUBLIC src/include)
+target_link_libraries(${PROJECT_NAME}      PUBLIC ${LIBELF_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}      PUBLIC gcov)
 
-target_include_directories(swplayer PUBLIC ${LIBELF_INCLUDE_DIRS})
-target_compile_options(swplayer     PUBLIC ${LIBELF_CFLAGS_OTHER})
+target_include_directories(${PROJECT_NAME} PUBLIC ${LIBELF_INCLUDE_DIRS})
+target_compile_options(${PROJECT_NAME}     PUBLIC ${LIBELF_CFLAGS_OTHER})
 
-add_executable(sw_player src/main.cpp)
-target_link_libraries(sw_player PUBLIC swplayer)
+add_executable(${PROJECT_NAME}_exe src/main.cpp)
+target_link_libraries(${PROJECT_NAME}_exe PUBLIC swplayer)
 
 _add_test(ftrace    "function trace system")
