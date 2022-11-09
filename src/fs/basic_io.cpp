@@ -2,7 +2,7 @@
 #include <cstring>
 #include <unistd.h>
 #include <simple_err.h>
-#include <openssl/sha.h>
+#include <fcntl.h>
 
 uint64_t block_t::modify(const char * buffer, uint64_t length, uint64_t start)
 {
@@ -70,4 +70,20 @@ void block_t::refresh()
         throw simple_error_t(SHORT_READ_CDX,
                              std::string("Short read on block ") + std::to_string(block_num));
     }
+}
+
+void io_on_dev::open(const char *pathname)
+{
+    fd = ::open(pathname, O_RDWR);
+    if (fd == -1)
+    {
+        throw simple_error_t(CANNOT_OPEN_FILE_CDX);
+    }
+
+    block_count = lseek(fd, 0, SEEK_END) / BLOCK_SIZE;
+}
+
+block_t io_on_dev::request(off64_t blk_num)
+{
+    return block_t(fd, blk_num);
 }

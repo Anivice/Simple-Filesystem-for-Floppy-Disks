@@ -31,4 +31,21 @@ public:
     block_t & operator = (const block_t &) = delete;
 };
 
+
+class io_on_dev
+{
+private:
+    int fd = 0;
+    off64_t block_count = 0;
+public:
+    // open device
+    void open(const char * pathname);
+
+    // get current device block count
+    [[nodiscard]] off64_t get_block_count() const { return block_count; }
+
+    // request a block
+    block_t request(off64_t blk_num);
+};
+
 #endif //FLOPPYFS_BASIC_IO_H

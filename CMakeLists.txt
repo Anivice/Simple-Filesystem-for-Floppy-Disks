@@ -34,6 +34,8 @@ add_library(${PROJECT_NAME} STATIC
         src/debug/invoke_addr2line.cpp
         src/debug/simple_err.cpp    src/include/simple_err.h
         src/fs/basic_io.cpp         src/include/basic_io.h
+        src/fs/utils.cpp
+        src/include/simplefs.h
         )
 target_include_directories(${PROJECT_NAME} PUBLIC src/include)
 target_link_libraries(${PROJECT_NAME}      PUBLIC ${LIBELF_LIBRARIES})
@@ -44,6 +46,9 @@ target_compile_options(${PROJECT_NAME}     PUBLIC ${LIBELF_CFLAGS_OTHER})
 
 add_executable(${PROJECT_NAME}_exe src/main.cpp)
 target_link_libraries(${PROJECT_NAME}_exe PUBLIC ${PROJECT_NAME})
+
+add_utils(mkfs.simplefs)
+add_utils(fsck.simplefs)
 
 _add_test(ftrace    "function trace system")
 _add_test(basic_io  "test for basic I/O")
