@@ -1,1 +1,1 @@
-# simple_mp3_player
+# simple_wav_player
