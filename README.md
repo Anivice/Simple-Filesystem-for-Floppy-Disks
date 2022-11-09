@@ -1,1 +1,1 @@
-# simple_wav_player
+# Template Project
