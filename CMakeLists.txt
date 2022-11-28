@@ -36,6 +36,7 @@ add_library(${PROJECT_NAME} STATIC
         src/fs/basic_io.cpp         src/include/basic_io.h
         src/fs/utils.cpp
         src/include/simplefs.h
+        src/fs/inode_io.cpp         src/include/inode_io.h
         )
 target_include_directories(${PROJECT_NAME} PUBLIC src/include)
 target_link_libraries(${PROJECT_NAME}      PUBLIC ${LIBELF_LIBRARIES})
@@ -52,3 +53,4 @@ add_utils(fsck.simplefs)
 
 _add_test(ftrace    "function trace system")
 _add_test(basic_io  "test for basic I/O")
+_add_test(io_on_dev "I/O on device")

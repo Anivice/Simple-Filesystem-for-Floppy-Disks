@@ -29,12 +29,12 @@ static_assert(sizeof(simplefs_head_t) == BLOCK_SIZE, "Incorrect head size");
 
 struct simplefs_inode_t
 {
-    char name [ 32 ];
-    struct stat inode_stat;
+    char name [ 32 ] { };
+    struct stat inode_stat { };
 
     uint32_t zone_map [
             84 /* 2nd level block */
-    ]; /* 84 * 512 / 4 * 512 = 5505024 = 5.25 Mb */
+    ] { }; /* 84 * 512 / 4 * 512 = 5505024 = 5.25 Mb */
 };
 static_assert(sizeof(simplefs_inode_t) == BLOCK_SIZE, "Incorrect head size");
 

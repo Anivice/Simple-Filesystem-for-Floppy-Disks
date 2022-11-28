@@ -4,9 +4,9 @@
 #include <simple_err.h>
 #include <fcntl.h>
 
-uint64_t block_t::modify(const char * buffer, uint64_t length, uint64_t start)
+uint32_t block_t::modify(const char * buffer, uint32_t length, uint32_t start)
 {
-    uint64_t modify_len;
+    uint32_t modify_len;
     if (start > BLOCK_SIZE)
     {
         return 0;
@@ -27,11 +27,11 @@ uint64_t block_t::modify(const char * buffer, uint64_t length, uint64_t start)
     return modify_len;
 }
 
-uint64_t block_t::copy(char * buffer, uint64_t length, uint64_t start)
+uint32_t block_t::copy(char * buffer, uint32_t length, uint32_t start)
 {
     refresh();
 
-    uint64_t copy_len;
+    uint32_t copy_len;
     if (start > BLOCK_SIZE)
     {
         return 0;
